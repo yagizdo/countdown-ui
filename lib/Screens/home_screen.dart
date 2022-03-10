@@ -11,6 +11,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController controller;
 
   int defaultMinutes = 2;
+  int defaultSeconds = 0;
   bool isCounting = false;
 
   double progress = 1.0;
@@ -18,7 +19,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = AnimationController(
-        vsync: this, duration: Duration(minutes: defaultMinutes));
+        vsync: this,
+        duration: Duration(minutes: defaultMinutes, seconds: defaultSeconds));
     controller.addListener(() {
       if (controller.isAnimating) {
         setState(() {
@@ -40,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   String get countText {
     Duration count = controller.duration! * controller.value;
-    return '${(count.inMinutes % 60 == 0 ? defaultMinutes : count.inMinutes % 60).toString().padLeft(2, '0')} : ${(count.inSeconds % 60).toString().padLeft(2, '0')}';
+    return '${(count.inMinutes % 60 == 0 ? defaultMinutes : count.inMinutes % 60).toString().padLeft(2, '0')} : ${(count.inSeconds % 60 == 0 ? defaultSeconds : count.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
