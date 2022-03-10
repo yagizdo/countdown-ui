@@ -10,14 +10,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController controller;
 
-  int defaultMinutes = 25;
+  int defaultMinutes = 2;
   bool isCounting = false;
 
+  double progress = 1.0;
   @override
   void initState() {
     super.initState();
     controller = AnimationController(
         vsync: this, duration: Duration(minutes: defaultMinutes));
+    controller.addListener(() {
+      if (controller.isAnimating) {
+        setState(() {
+          progress = controller.value;
+        });
+      } else {
+        setState(() {
+          progress = 1.0;
+        });
+      }
+    });
   }
 
   @override
@@ -33,18 +45,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
         body: Column(
       children: [
         Expanded(
-          child: Center(
-            child: AnimatedBuilder(
-              animation: controller,
-              builder: (context, child) => Text(
-                '$countText',
-                style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
-              ),
-            ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                  width: size.width / 1.2,
+                  height: size.height / 2,
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.grey.shade300,
+                    strokeWidth: 6,
+                    value: progress,
+                  )),
+              AnimatedBuilder(
+                animation: controller,
+                builder: (context, child) => Text(
+                  '$countText',
+                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+                ),
+              )
+            ],
           ),
         ),
         Padding(
