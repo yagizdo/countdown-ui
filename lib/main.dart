@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         title: 'Fomodoro',
         debugShowCheckedModeBanner: false,
-        theme: theme.darkTheme,
+        theme: theme.getTheme(),
         home: HomeScreen(),
       );
     });

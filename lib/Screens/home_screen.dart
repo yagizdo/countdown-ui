@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fomodoro/Theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -32,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         });
       }
     });
+    Provider.of<ThemeProvider>(context, listen: false).initSharedPreferences();
   }
 
   @override
@@ -51,20 +54,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     return Scaffold(
         body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Container(
+          width: 35,
+          height: 35,
+          color: Colors.white,
+          child: Consumer<ThemeProvider>(
+            builder: (context, theme, child) => IconButton(
+              onPressed: () {
+                ThemeProvider().readData('themeMode').then((value) {
+                  value == 'light' ? theme.setDarkMode() : theme.setLightMode();
+                });
+              },
+              icon: Icon(
+                Icons.dark_mode,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
         Expanded(
           child: Stack(
             alignment: Alignment.center,
             children: [
-              SizedBox(
-                  width: size.width / 1.2,
-                  height: size.height / 2,
-                  child: CircularProgressIndicator(
-                    color: Colors.grey.shade300,
-                    //backgroundColor: Colors.red,
-                    strokeWidth: 8,
-                    value: progress,
-                  )),
+              Center(
+                child: SizedBox(
+                    width: size.width / 1.2,
+                    height: size.height / 2,
+                    child: CircularProgressIndicator(
+                      color: Colors.grey.shade300,
+                      //backgroundColor: Colors.red,
+                      strokeWidth: 8,
+                      value: progress,
+                    )),
+              ),
               AnimatedBuilder(
                 animation: controller,
                 builder: (context, child) => Text(
