@@ -10,13 +10,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController controller;
 
+  int defaultMinutes = 25;
   bool isCounting = false;
 
   @override
   void initState() {
     super.initState();
     controller = AnimationController(
-        vsync: this, duration: const Duration(seconds: 180));
+        vsync: this, duration: Duration(minutes: defaultMinutes));
   }
 
   @override
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   String get countText {
     Duration count = controller.duration! * controller.value;
-    return '${(count.inMinutes % 60).toString().padLeft(2, '0')} : ${(count.inSeconds % 60).toString().padLeft(2, '0')}';
+    return '${(count.inMinutes % 60 == 0 ? defaultMinutes : count.inMinutes % 60).toString().padLeft(2, '0')} : ${(count.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
@@ -71,7 +72,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               const SizedBox(
                 width: 20,
               ),
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.stop)),
+              ElevatedButton(
+                  onPressed: () {
+                    controller.reset();
+                    setState(() {
+                      isCounting = false;
+                    });
+                  },
+                  child: Icon(Icons.stop)),
             ],
           ),
         )
