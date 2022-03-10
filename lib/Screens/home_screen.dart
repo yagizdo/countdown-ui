@@ -35,9 +35,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       children: [
         Expanded(
           child: Center(
-            child: Text(
-              '$countText',
-              style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+            child: AnimatedBuilder(
+              animation: controller,
+              builder: (context, child) => Text(
+                '$countText',
+                style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ),
