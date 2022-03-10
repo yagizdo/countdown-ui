@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fomodoro/Screens/home_screen.dart';
+import 'package:fomodoro/Theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider<ThemeProvider>(
+      create: (_) => ThemeProvider(),
+      builder: (context, snapshot) {
+        return const MyApp();
+      }));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,13 +17,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: HomeScreen(),
-    );
+    return Consumer<ThemeProvider>(builder: (context, theme, child) {
+      return MaterialApp(
+        title: 'Fomodoro',
+        debugShowCheckedModeBanner: false,
+        theme: theme.darkTheme,
+        home: HomeScreen(),
+      );
+    });
   }
 }
