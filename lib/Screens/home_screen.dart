@@ -58,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: size.width / 1.2,
                   height: size.height / 2,
                   child: CircularProgressIndicator(
-                    backgroundColor: Colors.grey.shade300,
+                    color: Colors.grey.shade300,
+                    backgroundColor: Colors.red,
                     strokeWidth: 6,
                     value: progress,
                   )),
