@@ -49,7 +49,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.play_arrow)),
+              ElevatedButton(
+                  onPressed: () {
+                    controller.reverse(
+                        from: controller.value == 0 ? 1.0 : controller.value);
+                  },
+                  child: Icon(Icons.play_arrow)),
               const SizedBox(
                 width: 20,
               ),
