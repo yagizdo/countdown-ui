@@ -7,7 +7,27 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 60));
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  String get countText {
+    Duration count = controller.duration! * controller.value;
+    return '${count.inSeconds}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Expanded(
           child: Center(
             child: Text(
-              '1:24:20',
+              '$countText',
               style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
             ),
           ),
