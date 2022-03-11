@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController controller;
 
   int defaultMinutes = 2;
-  int defaultSeconds = 0;
+  int defaultSeconds = 180;
   bool isCounting = false;
 
   double progress = 1.0;
@@ -21,8 +21,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = AnimationController(
-        vsync: this,
-        duration: Duration(minutes: defaultMinutes, seconds: defaultSeconds));
+        vsync: this, duration: Duration(seconds: defaultSeconds));
     controller.addListener(() {
       if (controller.isAnimating) {
         setState(() {
@@ -43,15 +42,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  void notify() {
+    if (countText == '00:00') {
+      //FlutterRingtonePlayer.playNotification();
+      print('sure bitti');
+    }
+  }
+
   String get countText {
     Duration count = controller.duration! * controller.value;
-    return '${(count.inMinutes % 60 == 0 ? defaultMinutes : count.inMinutes % 60).toString().padLeft(2, '0')} : ${(count.inSeconds % 60 == 0 ? defaultSeconds : count.inSeconds % 60).toString().padLeft(2, '0')}';
+    return '${count.inMinutes % 60} :${(count.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
+    notify();
     return Scaffold(
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,12 +69,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           child: Consumer<ThemeProvider>(
             builder: (context, theme, child) => IconButton(
               onPressed: () {
-                ThemeProvider().readData('themeMode').then((value) {
+                /*ThemeProvider().readData('themeMode').then((value) {
                   value == 'light' ? theme.setDarkMode() : theme.setLightMode();
-                });
+                });*/
               },
               icon: Icon(
-                Icons.dark_mode,
+                Icons.settings,
                 color: Colors.black,
               ),
             ),
