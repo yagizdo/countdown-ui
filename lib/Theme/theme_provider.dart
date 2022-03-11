@@ -10,20 +10,8 @@ class ThemeProvider with ChangeNotifier {
   ThemeData? getTheme() => _themeData;
 
   final darkTheme = ThemeData(
-      primaryColor: Colors.black,
-      brightness: Brightness.dark,
-      scaffoldBackgroundColor: HexColor('#1B262C'),
-      secondaryHeaderColor: Colors.grey.shade300,
-      // Elevated Button
-      elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        onPrimary: Colors.black,
-      )),
-      progressIndicatorTheme:
-          ProgressIndicatorThemeData(circularTrackColor: Colors.blue));
-
-  final lightTheme = ThemeData(
+      // Progress
+      secondaryHeaderColor: Colors.redAccent,
       primaryColor: Colors.white,
       scaffoldBackgroundColor: Colors.red,
       brightness: Brightness.dark,
@@ -32,9 +20,42 @@ class ThemeProvider with ChangeNotifier {
           style: ElevatedButton.styleFrom(
         primary: Colors.white,
         onPrimary: Colors.red,
+        minimumSize: Size.fromRadius(30),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50),
+            topRight: Radius.circular(50),
+            bottomLeft: Radius.circular(50),
+            bottomRight: Radius.circular(50),
+          ),
+        ),
       )),
-      progressIndicatorTheme:
-          ProgressIndicatorThemeData(circularTrackColor: Colors.red.shade700));
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+          color: Colors.black, circularTrackColor: Colors.red.shade700));
+
+  final lightTheme = ThemeData(
+    // Progress
+    secondaryHeaderColor: HexColor('#D047FF'),
+    primaryColor: Colors.black,
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: Colors.white,
+    // Elevated Button
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+      primary: HexColor('#D047FF'),
+      onPrimary: Colors.white,
+      minimumSize: Size.fromRadius(30),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50),
+          topRight: Radius.circular(50),
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
+        ),
+      ),
+    )),
+    // Elevated Button
+  );
 
   // methods for shared preferences
   void initSharedPreferences() async {
@@ -60,7 +81,6 @@ class ThemeProvider with ChangeNotifier {
   Future<dynamic> readData(String key) async {
     final prefs = await SharedPreferences.getInstance();
     dynamic obj = prefs.get(key);
-    print('obj : $obj');
     return obj;
   }
 
@@ -76,7 +96,7 @@ class ThemeProvider with ChangeNotifier {
       if (themeMode == 'light') {
         _themeData = lightTheme;
       } else {
-        print('setting dark theme');
+        //print('setting dark theme');
         _themeData = darkTheme;
       }
       notifyListeners();

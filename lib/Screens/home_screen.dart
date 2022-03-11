@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fomodoro/Theme/theme_provider.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:liquid_progress_indicator_ns/liquid_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,11 +84,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: SizedBox(
                     width: size.width / 1.2,
                     height: size.height / 2,
-                    child: CircularProgressIndicator(
-                      color: Colors.grey.shade300,
+                    child: LiquidCircularProgressIndicator(
                       //backgroundColor: Colors.red,
-                      strokeWidth: 8,
+                      backgroundColor: HexColor('#D9DEE1'),
+                      valueColor: AlwaysStoppedAnimation(
+                          Theme.of(context).secondaryHeaderColor),
+                      borderWidth: 4,
                       value: progress,
+                      borderColor: HexColor('#D9DEE1'),
                     )),
               ),
               AnimatedBuilder(
