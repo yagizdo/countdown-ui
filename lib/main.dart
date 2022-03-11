@@ -1,18 +1,26 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fomodoro/Screens/home_screen.dart';
 import 'package:fomodoro/Theme/theme_provider.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var _themeMode = await ThemeProvider().readData('themeMode');
   runApp(ChangeNotifierProvider<ThemeProvider>(
       create: (_) => ThemeProvider(),
       builder: (context, snapshot) {
-        return const MyApp();
+        return MyApp(
+          themeMode: _themeMode,
+        );
       }));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key, this.themeMode}) : super(key: key);
+
+  var themeMode;
 
   // This widget is the root of your application.
   @override
@@ -22,7 +30,13 @@ class MyApp extends StatelessWidget {
         title: 'Fomodoro',
         debugShowCheckedModeBanner: false,
         theme: theme.getTheme(),
-        home: HomeScreen(),
+        home: AnimatedSplashScreen(
+          splash: Icons.home,
+          backgroundColor:
+              themeMode == 'light' ? HexColor('#D047FF') : Colors.red,
+          nextScreen: HomeScreen(),
+          duration: 3000,
+        ),
       );
     });
   }

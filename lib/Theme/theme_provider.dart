@@ -10,31 +10,34 @@ class ThemeProvider with ChangeNotifier {
   ThemeData? getTheme() => _themeData;
 
   final darkTheme = ThemeData(
-      // Progress
-      secondaryHeaderColor: Colors.redAccent,
-      primaryColor: Colors.white,
-      scaffoldBackgroundColor: Colors.red,
-      brightness: Brightness.dark,
-      // Elevated Button
-      elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        onPrimary: Colors.red,
-        minimumSize: Size.fromRadius(30),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50),
-            topRight: Radius.circular(50),
-            bottomLeft: Radius.circular(50),
-            bottomRight: Radius.circular(50),
-          ),
+    splashColor: Colors.pink,
+    // Progress
+    secondaryHeaderColor: Colors.redAccent,
+    progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.white),
+    primaryColor: Colors.white,
+    scaffoldBackgroundColor: Colors.red,
+    brightness: Brightness.dark,
+    // Elevated Button
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+      primary: Colors.white,
+      onPrimary: Colors.red,
+      minimumSize: Size.fromRadius(30),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50),
+          topRight: Radius.circular(50),
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
         ),
-      )),
-      progressIndicatorTheme: ProgressIndicatorThemeData(
-          color: Colors.black, circularTrackColor: Colors.red.shade700));
+      ),
+    )),
+  );
 
   final lightTheme = ThemeData(
-    // Progress
+    progressIndicatorTheme:
+        ProgressIndicatorThemeData(color: Colors.grey.shade300),
+    // Progress Border
     secondaryHeaderColor: HexColor('#D047FF'),
     primaryColor: Colors.black,
     brightness: Brightness.dark,

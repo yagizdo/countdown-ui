@@ -38,6 +38,7 @@ dependencies:
   hexcolor: ^2.0.6
   shared_preferences: ^2.0.13
   liquid_progress_indicator_ns: ^1.0.0
+  animated_splash_screen: ^1.2.0
 
 dev_dependencies:
   flutter_test:
