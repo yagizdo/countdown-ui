@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 builder: (context, child) => Text(
                   '$countText',
                   style: TextStyle(
-                    fontSize: 60,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor,
                   ),
