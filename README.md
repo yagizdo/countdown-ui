@@ -1,16 +1,45 @@
-# fomodoro
+# Flutter - Countdown UI
 
-A new Flutter project.
+Countdown UI I made with Flutter.
 
-## Getting Started
+## Run Locally
 
-This project is a starting point for a Flutter application.
+Clone the project
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+  git clone https://github.com/yagizdo/countdown-ui
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Go to the project directory
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+  cd countdown-ui
+```
+
+Install dependencies
+
+```bash
+  flutter pub get
+```
+
+Run App
+
+```bash
+  flutter run
+```
+
+##  Libraries I use in the application:
+- Provider : https://pub.dev/packages/provider
+- Hexcolor : https://pub.dev/packages/hexcolor
+- Shared Preferences : https://pub.dev/packages/shared_preferences
+- Liquid Progress Indicator Ns : https://pub.dev/packages/liquid_progress_indicator_ns
+- Animated Splash Screen : https://pub.dev/packages/animated_splash_screen
+
+## App Video
+
+https://user-images.githubusercontent.com/31064552/177648609-11f26e05-c152-49c0-b017-4c7311576c1a.mp4
+
+
+## Contributing
+
+Contributions are always welcome!
